@@ -1,12 +1,8 @@
 import { Artwork } from "../context/AppContext";
 
-type setMode = {setMode : React.Dispatch<React.SetStateAction<'list' | 'detail'>>};
+function ArtworkDetails(props: any) {
 
 
-type ArtworkDetailsProps = Artwork & setMode;
-
-
-function ArtworkDetails(props: ArtworkDetailsProps) {
     return (
         <div className="w-full p-24 flex gap-8 justify-center">
             <img

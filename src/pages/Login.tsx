@@ -4,10 +4,12 @@ import PasswordInput from "../components/PasswordInput";
 import loginIllustration from "../assets/loginIllustration.jpg";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const setIsLoggedIn = useContext(AppContext).setIsLoggedIn;
     const setIsLoading = useContext(AppContext).setIsLoading;
+    const navigate = useNavigate();
 
     let users = [{username: 'admin', password: 'admin'}];
 
@@ -33,6 +35,7 @@ function Login() {
         if(users.find(user => user.username === loginData.username && user.password === loginData.password)){
             setIsLoggedIn(true);
             localStorage.setItem('isLoggedIn', 'true');
+            navigate('/');
         }else{
             toast.warn('Username atau password salah',{theme: 'colored'});
         }
@@ -55,7 +58,7 @@ function Login() {
                     <p className="md:text-neutral-400 text-sm mb-8 text-white">Masukkan username dan password anda</p>
                     <form onSubmit={e => {e.preventDefault(); login()}} className="w-full flex flex-col">
                         <TextInput name="username" errorMsg={loginData.usernameErrMsg} value={loginData.username} onChange={handleChange} className="mb-4 w-full" title="username" />
-                        <PasswordInput name="password" errorMsg={loginData.passwordErrMsg} value={loginData.password} onChange={handleChange} className="mb-8" title="username"/>
+                        <PasswordInput name="password" errorMsg={loginData.passwordErrMsg} value={loginData.password} onChange={handleChange} className="mb-8" title="password"/>
                         <button className="bg-teal-400 py-3 rounded text-white font-bold" type='submit'>
                             Masuk
                         </button>
